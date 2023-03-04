@@ -114,15 +114,15 @@ function App() {
           <div style={{fontWeight:'600'}} className='presidential md:text-sm text-xs'>PRESIDENTIAL / 2023</div>
         </div>
 
-        <div className='lg:px-12 flex md:flex-row flex-col justify-between items-center'>
+        <div className='lg:px-12 flex md:flex-row flex-col justify-between'>
           <div className=''>
             <span className='text-white' style={{fontSize:'24px', fontWeight:'500'}}>Presidential Race</span>
           </div>
 
           <div className='flex lg:flex-row flex-col justify-between space-x-5 text-white'>
             <div>
-              <div className='border border-solid rounded p-2 mb-3' onClick={showChild} style={{borderColor: '#252B46'}}>
-                Election Data <i class="las la-caret-down px-2"></i>
+              <div className='border border-solid rounded p-2 mb-3 ml-5 flex flex-row justify-between' onClick={showChild} style={{borderColor: '#252B46'}}>
+                Election Data <i class="las la-caret-down px-2 mt-1"></i>
               </div>
               <div style={{backgroundColor: "#1a1d2d"}} className='p-3 hidden absolute'>
                 <p className='mb-3'>Pre-Election</p>
@@ -133,8 +133,8 @@ function App() {
               </div>
             </div>
             <div>
-              <div className='border border-solid rounded p-2 mb-3' onClick={showChild} style={{borderColor: '#252B46'}}>
-              Presidential <i class="las la-caret-down px-2"></i>
+              <div className='border border-solid rounded p-2 mb-3 flex flex-row justify-between' onClick={showChild} style={{borderColor: '#252B46'}}>
+              Presidential <i class="las la-caret-down px-2 mt-1"></i>
               </div>
               <div style={{backgroundColor: "#1a1d2d"}} className='p-3 hidden absolute'>
                 <p className='mb-3'>Presidential</p>
@@ -147,8 +147,8 @@ function App() {
               </div>
             </div>
             <div>
-              <div className='border border-solid rounded p-2 mb-3' onClick={showChild} style={{borderColor: '#252B46'}}>
-              2023 <i class="las la-caret-down px-2"></i>
+              <div className='border border-solid rounded p-2 mb-3 flex flex-row justify-between' onClick={showChild} style={{borderColor: '#252B46'}}>
+              2023 <i class="las la-caret-down px-2 mt-1"></i>
               </div>
               <div style={{backgroundColor: "#1a1d2d"}} className='p-3 hidden absolute'>
                 <p className='mb-3'>2023</p>
