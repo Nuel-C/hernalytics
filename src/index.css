@@ -1,0 +1,28 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.presidential{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: auto;
+    background: #181C2E;
+    border: 1px solid #242B47;
+    border-radius: 4px;
+    height: 100%;
+    margin-top: 1%;
+}
+
+.dropdown{
+    box-sizing: border-box;
+    background: #1C2031;
+    border: 1px solid #252B46;
+    border-radius: 6px;
+    width:200px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1%;
+    font-size: 12px;
+}
