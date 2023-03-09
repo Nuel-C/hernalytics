@@ -5,6 +5,7 @@ import Twitter from './assets/twitter.jpg'
 import Whatsapp from './assets/watsapp.jpg'
 import { DoughnutChart } from './components/DoughnutChart';
 import { MiniMap } from './components/MiniMap';
+import { useEffect, useState } from 'react'
 
 
 
@@ -17,11 +18,83 @@ function App() {
         !function(){"use strict";window.addEventListener("message",(function(e){if(void 0!==e.data["datawrapper-height"]){var t=document.querySelectorAll("iframe");for(var a in e.data["datawrapper-height"])for(var r=0;r<t.length;r++){if(t[r].contentWindow===e.source)t[r].style.height=e.data["datawrapper-height"][a]+"px"}}}))}();
     </script>
   </div>`;
-
   const showChild = (e) => {
     e.target.nextElementSibling.classList.toggle('hidden')
   }
+  let PresidentData = new Array()
+  let MapData = new Array()
+  let StateData = new Object()
+  const [presidentData, setPresidentData] = useState([])
+  const [mapData, setMapData] = useState([])
+  const [stateData, setStateData] = useState({})
 
+
+
+  
+  
+  useEffect(() => {
+    const baseUri = 'https://elect-her.herokuapp.com/api/v1/'
+    return () => {
+      const fetchPresidentData = () => {
+        fetch(`${baseUri}elections/candidate-total-votes?type=president`, {
+          method: "GET",
+          headers: {
+              "Content-type": "application/json",
+              "Accept": "application/json, text/plain, */*"
+          }
+        })
+        .then((res) => {
+          return res.json()
+        })
+        .then((data) => {
+          data.map(info => PresidentData.push(info))
+          setPresidentData(PresidentData)
+          console.log(PresidentData)
+        })
+      }
+      fetchPresidentData()
+    
+      const fetchStateData = () => {
+        fetch(`${baseUri}elections/candidate-total-votes?type=state_result`, {
+          method: "GET",
+          headers: {
+              "Content-type": "application/json",
+              "Accept": "application/json, text/plain, */*"
+          }
+        })
+        .then((res) => {
+          return res.json()
+        })
+        .then((data) => {
+          StateData = data
+          setStateData(StateData)
+          console.log(StateData)
+        })
+      }
+      fetchStateData()
+    
+      const fetchMapData = () => {
+        fetch(`${baseUri}elections/candidate-total-votes?type=map`, {
+          method: "GET",
+          headers: {
+              "Content-type": "application/json",
+              "Accept": "application/json, text/plain, */*"
+          }
+        })
+        .then((res) => {
+          return res.json()
+        })
+        .then((data) => {
+          data.map(info => MapData.push(info))
+          setMapData(MapData)
+          console.log(MapData)
+        })
+      }
+      fetchMapData()
+    }
+  }, [])
+  
+  
 
 
   return (
@@ -194,27 +267,77 @@ function App() {
 
         <div className='lg:mx-12 my-5' style={{width:'100%', borderBottom:'1px solid #242B47'}}></div>
 
-        <div className='lg:mx-12 flex flex-row justify-between' style={{border:'0.5px solid grey', borderRadius:'20px'}}>
-          <div dangerouslySetInnerHTML={{ __html: myHTML }} style={{width:'80%'}}/>
-          <div style={{width:'20%', backgroundColor:'#1b1f30', borderTopRightRadius:'20px', borderBottomRightRadius:'20px', padding:'5%'}} className='flex flex-col justify-between'>
-            <div className='flex flex-col justify-between'>
-              <button style={{backgroundColor:'white', borderTopLeftRadius:'5px', borderTopRightRadius:'5px'}} className='m-2 lg:w-10 w-5 lg:p-2'><i class="las la-plus"></i></button>
-              <button style={{backgroundColor:'white', borderBottomLeftRadius:'5px', borderBottomRightRadius:'5px'}} className='m-2 lg:w-10 w-5 lg:p-2'><i class="las la-minus"></i></button>
+        <div className='lg:mx-12 p-5 lg:p-12 my-5 text-left' style={{border:'0.5px solid grey', borderRadius:'20px', backgroundColor:'#1b1f30'}}>
+          <p style={{color:'white', fontWeight:'600'}}>Presidential Result</p><br/>
+          <table className='w-full text-white text-sm lg:text-sm'>
+            <thead>
+              <tr style={{borderBottom:'1px solid grey', borderTop:'1px solid grey'}}>
+                <th className='w-1/3 lg:p-5 bg-slate-300 text-black'>Party</th>
+                <th className='w-1/3 lg:p-5 bg-slate-300 text-black'>Candidate</th>
+                <th className='w-1/3 lg:p-5 bg-slate-300 text-black'>Votes</th>
+              </tr>
+            </thead>
+            <tbody>
+            {
+              presidentData.map(data =>
+                <tr className='text-white w-full my-5' style={{borderBottom:'1px solid grey'}}>
+                  <td className='w-1/3 lg:p-5'>{data.political_party_name}</td>
+                  <td className='w-1/3 lg:p-5'>{data.full_name}</td>
+                  <td className='w-1/3 lg:p-5'>{data.candidates_vote}</td>
+                </tr>
+              )
+            }
+            </tbody>
+          </table>
+        </div>
+
+        <div className='lg:mx-12' style={{border:'0.5px solid grey', borderRadius:'20px', backgroundColor:'#1b1f30'}}>
+          <div className='flex flex-row justify-between'>
+            <div dangerouslySetInnerHTML={{ __html: myHTML }} style={{width:'80%'}}/>
+            <div style={{width:'20%', backgroundColor:'#1b1f30', borderTopRightRadius:'20px', borderBottomRightRadius:'20px', padding:'5%'}} className='flex flex-col justify-between'>
+              <div className='flex flex-col justify-between'>
+                <button style={{backgroundColor:'white', borderTopLeftRadius:'5px', borderTopRightRadius:'5px'}} className='m-2 lg:w-10 w-5 lg:p-2'><i class="las la-plus"></i></button>
+                <button style={{backgroundColor:'white', borderBottomLeftRadius:'5px', borderBottomRightRadius:'5px'}} className='m-2 lg:w-10 w-5 lg:p-2'><i class="las la-minus"></i></button>
+              </div>
+              <div className='flex flex-col justify-between p-0'>
+                <div className='flex flex-row justify-between py-2 text-left'>
+                  <button className='lg:p-5 p-2' style={{backgroundColor:'#18a1cd'}}></button>
+                  <span className='text-white lg:text-lg text-xs'>APC</span>
+                </div>
+                <div className='flex flex-row justify-between py-2 text-left'>
+                  <button className='lg:p-5 p-2' style={{backgroundColor:'#09bb9f'}}></button>
+                  <span className='text-white lg:text-lg text-xs'>LP</span>
+                </div>
+                <div className='flex flex-row justify-between py-2 text-left'>
+                  <button className='lg:p-5 p-2' style={{backgroundColor:'#c71e1d'}}></button>
+                  <span className='text-white lg:text-lg text-xs'>PDP</span>
+                </div>
+              </div>
             </div>
-            <div className='flex flex-col justify-between p-0'>
-              <div className='flex flex-row justify-between py-2 text-left'>
-                <button className='lg:p-5 p-2' style={{backgroundColor:'#18a1cd'}}></button>
-                <span className='text-white lg:text-lg text-xs'>APC</span>
-              </div>
-              <div className='flex flex-row justify-between py-2 text-left'>
-                <button className='lg:p-5 p-2' style={{backgroundColor:'#09bb9f'}}></button>
-                <span className='text-white lg:text-lg text-xs'>LP</span>
-              </div>
-              <div className='flex flex-row justify-between py-2 text-left'>
-                <button className='lg:p-5 p-2' style={{backgroundColor:'#c71e1d'}}></button>
-                <span className='text-white lg:text-lg text-xs'>PDP</span>
-              </div>
-            </div>
+          </div>
+
+          <div className='lg:mx-12 p-5 lg:p-12 my-5 text-left m-2' style={{borderRadius:'20px'}}>
+            <p style={{color:'white', fontWeight:'600'}}>State Leading Party</p><br/>
+            <table className='w-full text-white text-sm lg:text-sm'>
+              <thead>
+                <tr style={{borderBottom:'1px solid grey', borderTop:'1px solid grey'}}>
+                  <th className='w-1/3 lg:p-5 bg-slate-300 text-black'>State</th>
+                  <th className='w-1/3 lg:p-5 bg-slate-300 text-black'>Leading Party</th>
+                  <th className='w-1/3 lg:p-5 bg-slate-300 text-black'>Votes</th>
+                </tr>
+              </thead>
+              <tbody>
+              {
+                mapData.map(data =>
+                  <tr className='text-white w-full my-5' style={{borderBottom:'1px solid grey'}}>
+                    <td className='w-1/3 lg:p-5'>{data.name}</td>
+                    <td className='w-1/3 lg:p-5'>{data.political_party_name}</td>
+                    <td className='w-1/3 lg:p-5'>{data.candidate_votes}</td>
+                  </tr>
+                )
+              }
+              </tbody>
+            </table>
           </div>
         </div>
 
@@ -244,8 +367,44 @@ function App() {
         </div>
 
       </div>
+
+        <div className='hidden lg:block lg:mx-12 p-5 lg:p-12 my-5 text-left' style={{border:'0.5px solid grey', borderRadius:'20px', backgroundColor:'#1b1f30'}}>
+          <p style={{color:'white', fontWeight:'600'}}>State Results</p><br/>
+          <table className='w-full text-white text-sm lg:text-sm'>
+            <thead>
+              <tr style={{borderBottom:'1px solid grey', borderTop:'1px solid grey'}}>
+                <th className='lg:p-5 bg-slate-300 text-black'>State</th>
+                <th className='lg:p-5 bg-slate-300 text-black'>Party 1</th>
+                <th className='lg:p-5 bg-slate-300 text-black'>Votes</th>
+                <th className='lg:p-5 bg-slate-300 text-black'>Party 2</th>
+                <th className='lg:p-5 bg-slate-300 text-black'>Votes</th>
+                <th className='lg:p-5 bg-slate-300 text-black'>Party 3</th>
+                <th className='lg:p-5 bg-slate-300 text-black'>Votes</th>
+              </tr>
+            </thead>
+            <tbody>
+            {
+              Object.keys(stateData).map(data=>
+                <tr className='' style={{borderBottom:'1px solid grey'}}>
+                  <td className='lg:p-5'>{data}</td>
+                  {
+                    stateData[data].map(info=>
+                      <>
+                        <td className='lg:p-5'>{info.political_party_name}</td>
+                        <td className='lg:p-5'>{info.candidate_votes}</td>
+                      </>
+                    )
+                  }
+                </tr>
+               )
+            }
+            </tbody>
+          </table>
+        </div>
+
       </div>
-      
+
+     
 
       <footer className='bg-gray-700 relative p-8 px-20'>
         <div className='flex lg:flex-row flex-col justufy-around lg:items-center items-start space-x-16'>
