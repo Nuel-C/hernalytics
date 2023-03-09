@@ -279,7 +279,7 @@ function App() {
             </thead>
             <tbody>
             {
-              presidentData.map(data =>
+              PresidentData.map(data =>
                 <tr className='text-white w-full my-5' style={{borderBottom:'1px solid grey'}}>
                   <td className='w-1/3 lg:p-5'>{data.political_party_name}</td>
                   <td className='w-1/3 lg:p-5'>{data.full_name}</td>
@@ -328,7 +328,7 @@ function App() {
               </thead>
               <tbody>
               {
-                mapData.map(data =>
+                MapData.map(data =>
                   <tr className='text-white w-full my-5' style={{borderBottom:'1px solid grey'}}>
                     <td className='w-1/3 lg:p-5'>{data.name}</td>
                     <td className='w-1/3 lg:p-5'>{data.political_party_name}</td>
@@ -384,11 +384,11 @@ function App() {
             </thead>
             <tbody>
             {
-              Object.keys(stateData).map(data=>
+              Object.keys(StateData).map(data=>
                 <tr className='' style={{borderBottom:'1px solid grey'}}>
                   <td className='lg:p-5'>{data}</td>
                   {
-                    stateData[data].map(info=>
+                    StateData[data].map(info=>
                       <>
                         <td className='lg:p-5'>{info.political_party_name}</td>
                         <td className='lg:p-5'>{info.candidate_votes}</td>
