@@ -33,10 +33,9 @@ function App() {
   
   
   useEffect(() => {
-    const baseUri = 'https://elect-her.herokuapp.com/api/v1/'
     return () => {
       const fetchPresidentData = () => {
-        fetch(`${baseUri}elections/candidate-total-votes?type=president`, {
+        fetch('https://elect-her.herokuapp.com/api/v1/elections/candidate-total-votes?type=president', {
           method: "GET",
           headers: {
               "Content-type": "application/json",
@@ -55,11 +54,11 @@ function App() {
       fetchPresidentData()
     
       const fetchStateData = () => {
-        fetch(`${baseUri}elections/candidate-total-votes?type=state_result`, {
+        fetch('https://elect-her.herokuapp.com/api/v1/elections/candidate-total-votes?type=state_result', {
           method: "GET",
           headers: {
               "Content-type": "application/json",
-              "Accept": "application/json, text/plain, */*"
+              "Accept": "application/json"
           }
         })
         .then((res) => {
@@ -74,11 +73,11 @@ function App() {
       fetchStateData()
     
       const fetchMapData = () => {
-        fetch(`${baseUri}elections/candidate-total-votes?type=map`, {
+        fetch('https://elect-her.herokuapp.com/api/v1/elections/candidate-total-votes?type=map', {
           method: "GET",
           headers: {
               "Content-type": "application/json",
-              "Accept": "application/json, text/plain, */*"
+              "Accept": "application/json"
           }
         })
         .then((res) => {
