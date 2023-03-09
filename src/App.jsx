@@ -40,7 +40,7 @@ function App() {
           method: "GET",
           headers: {
               "Content-type": "application/json",
-              "Accept": "application/json, text/plain, */*"
+              "Accept": "application/json"
           }
         })
         .then((res) => {
@@ -279,7 +279,7 @@ function App() {
             </thead>
             <tbody>
             {
-              PresidentData.map(data =>
+              presidentData.map(data =>
                 <tr className='text-white w-full my-5' style={{borderBottom:'1px solid grey'}}>
                   <td className='w-1/3 lg:p-5'>{data.political_party_name}</td>
                   <td className='w-1/3 lg:p-5'>{data.full_name}</td>
@@ -328,7 +328,7 @@ function App() {
               </thead>
               <tbody>
               {
-                MapData.map(data =>
+                mapData.map(data =>
                   <tr className='text-white w-full my-5' style={{borderBottom:'1px solid grey'}}>
                     <td className='w-1/3 lg:p-5'>{data.name}</td>
                     <td className='w-1/3 lg:p-5'>{data.political_party_name}</td>
@@ -384,11 +384,11 @@ function App() {
             </thead>
             <tbody>
             {
-              Object.keys(StateData).map(data=>
+              Object.keys(stateData).map(data=>
                 <tr className='' style={{borderBottom:'1px solid grey'}}>
                   <td className='lg:p-5'>{data}</td>
                   {
-                    StateData[data].map(info=>
+                    stateData[data].map(info=>
                       <>
                         <td className='lg:p-5'>{info.political_party_name}</td>
                         <td className='lg:p-5'>{info.candidate_votes}</td>
