@@ -49,6 +49,7 @@ function App() {
           data.map(info => PresidentData.push(info))
           setPresidentData(PresidentData)
           console.log(PresidentData)
+          return true
         })
       }
       fetchPresidentData()
@@ -68,6 +69,7 @@ function App() {
           StateData = data
           setStateData(StateData)
           console.log(StateData)
+          return true
         })
       }
       fetchStateData()
@@ -87,6 +89,7 @@ function App() {
           data.map(info => MapData.push(info))
           setMapData(MapData)
           console.log(MapData)
+          return true
         })
       }
       fetchMapData()
