@@ -40,7 +40,8 @@ function App() {
           headers: {
               "Content-type": "application/json",
               "Accept": "application/json"
-          }
+          },
+          redirect: 'follow'
         })
         .then((res) => {
           return res.json()
@@ -59,7 +60,8 @@ function App() {
           headers: {
               "Content-type": "application/json",
               "Accept": "application/json"
-          }
+          },
+          redirect: 'follow'
         })
         .then((res) => {
           return res.json()
@@ -78,7 +80,8 @@ function App() {
           headers: {
               "Content-type": "application/json",
               "Accept": "application/json"
-          }
+          },
+          redirect: 'follow'
         })
         .then((res) => {
           return res.json()
