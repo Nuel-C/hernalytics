@@ -38,7 +38,6 @@ function App() {
         fetch('https://elect-her.herokuapp.com/api/v1/elections/candidate-total-votes?type=president', {
           method: "GET",
           headers: {
-              "Content-type": "application/json",
               "Accept": "application/json"
           },
           redirect: 'follow'
@@ -58,7 +57,6 @@ function App() {
         fetch('https://elect-her.herokuapp.com/api/v1/elections/candidate-total-votes?type=state_result', {
           method: "GET",
           headers: {
-              "Content-type": "application/json",
               "Accept": "application/json"
           },
           redirect: 'follow'
@@ -78,7 +76,6 @@ function App() {
         fetch('https://elect-her.herokuapp.com/api/v1/elections/candidate-total-votes?type=map', {
           method: "GET",
           headers: {
-              "Content-type": "application/json",
               "Accept": "application/json"
           },
           redirect: 'follow'
